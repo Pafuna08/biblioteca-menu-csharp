@@ -25,7 +25,6 @@ class Program
             Console.WriteLine("4. Búsquedas y reportes");
             Console.WriteLine("5. Guardar / Cargar datos");
             Console.WriteLine("6. Salir");
-
             Console.Write("Seleccione una opción: ");
 
             int.TryParse(Console.ReadLine(), out option);
@@ -112,6 +111,72 @@ class Program
         } while (option != 0);
     }
 
+    static void ListBooksMenu()
+    {
+        int option;
+
+        do
+        {
+            Console.Clear();
+            Console.WriteLine("=== LISTAR LIBROS ===");
+            Console.WriteLine("1. Listar todos");
+            Console.WriteLine("2. Listar disponibles");
+            Console.WriteLine("3. Listar prestados");
+            Console.WriteLine("0. Volver");
+
+            int.TryParse(Console.ReadLine(), out option);
+
+            switch (option)
+            {
+                case 1:
+                    ListBooksAll();
+                    break;
+
+                case 2:
+                    ListBooksAvailable();
+                    break;
+
+                case 3:
+                    ListBooksBorrowed();
+                    break;
+            }
+
+        } while (option != 0);
+    }
+
+    static void UpdateBookMenu()
+    {
+        int option;
+
+        do
+        {
+            Console.Clear();
+            Console.WriteLine("=== ACTUALIZAR LIBRO ===");
+            Console.WriteLine("1. Editar título");
+            Console.WriteLine("2. Editar autor");
+            Console.WriteLine("3. Editar año / categoría");
+            Console.WriteLine("0. Volver");
+
+            int.TryParse(Console.ReadLine(), out option);
+
+            switch (option)
+            {
+                case 1:
+                    EditBookTitle();
+                    break;
+
+                case 2:
+                    EditBookAuthor();
+                    break;
+
+                case 3:
+                    EditBookYearCategory();
+                    break;
+            }
+
+        } while (option != 0);
+    }
+
     // ==============================
     // MENÚ USUARIOS
     // ==============================
@@ -153,6 +218,39 @@ class Program
 
                 case 5:
                     DeleteUser();
+                    break;
+            }
+
+        } while (option != 0);
+    }
+
+    static void UpdateUserMenu()
+    {
+        int option;
+
+        do
+        {
+            Console.Clear();
+            Console.WriteLine("=== ACTUALIZAR USUARIO ===");
+            Console.WriteLine("1. Editar nombre");
+            Console.WriteLine("2. Editar contacto");
+            Console.WriteLine("3. Activar / desactivar");
+            Console.WriteLine("0. Volver");
+
+            int.TryParse(Console.ReadLine(), out option);
+
+            switch (option)
+            {
+                case 1:
+                    EditUserName();
+                    break;
+
+                case 2:
+                    EditUserContact();
+                    break;
+
+                case 3:
+                    ToggleUserActiveStatus();
                     break;
             }
 
@@ -206,8 +304,41 @@ class Program
         } while (option != 0);
     }
 
+    static void ListLoansMenu()
+    {
+        int option;
+
+        do
+        {
+            Console.Clear();
+            Console.WriteLine("=== LISTAR PRÉSTAMOS ===");
+            Console.WriteLine("1. Todos");
+            Console.WriteLine("2. Activos");
+            Console.WriteLine("3. Cerrados");
+            Console.WriteLine("0. Volver");
+
+            int.TryParse(Console.ReadLine(), out option);
+
+            switch (option)
+            {
+                case 1:
+                    ListLoansAll();
+                    break;
+
+                case 2:
+                    ListLoansActive();
+                    break;
+
+                case 3:
+                    ListLoansClosed();
+                    break;
+            }
+
+        } while (option != 0);
+    }
+
     // ==============================
-    // MENÚ REPORTES
+    // MENÚ BÚSQUEDAS Y REPORTES
     // ==============================
 
     static void ShowSearchReportsMenu()
@@ -237,6 +368,44 @@ class Program
 
                 case 3:
                     ShowReportsMenu();
+                    break;
+            }
+
+        } while (option != 0);
+    }
+
+    static void ShowReportsMenu()
+    {
+        int option;
+
+        do
+        {
+            Console.Clear();
+            Console.WriteLine("=== REPORTES ===");
+            Console.WriteLine("1. Reporte por usuario");
+            Console.WriteLine("2. Reporte por libro");
+            Console.WriteLine("3. Libros vencidos");
+            Console.WriteLine("4. Resumen");
+            Console.WriteLine("0. Volver");
+
+            int.TryParse(Console.ReadLine(), out option);
+
+            switch (option)
+            {
+                case 1:
+                    ReportByUser();
+                    break;
+
+                case 2:
+                    ReportByBook();
+                    break;
+
+                case 3:
+                    ReportOverdue();
+                    break;
+
+                case 4:
+                    ReportSummary();
                     break;
             }
 
@@ -281,259 +450,72 @@ class Program
     }
 
     // ==============================
-    // FUNCIONES LIBROS
+    // FUNCIONES STUB
     // ==============================
 
-    static void RegisterBook()
-    {
-        Console.WriteLine("Función RegisterBook ejecutada");
-        Console.ReadKey();
-    }
+    static void RegisterBook() { Console.WriteLine("Registrar libro"); Console.ReadKey(); }
+    static void ListBooksAll() { Console.WriteLine("Listar todos los libros"); Console.ReadKey(); }
+    static void ListBooksAvailable() { Console.WriteLine("Listar libros disponibles"); Console.ReadKey(); }
+    static void ListBooksBorrowed() { Console.WriteLine("Listar libros prestados"); Console.ReadKey(); }
+    static void ViewBookDetail() { Console.WriteLine("Ver detalle del libro"); Console.ReadKey(); }
+    static void EditBookTitle() { Console.WriteLine("Editar título del libro"); Console.ReadKey(); }
+    static void EditBookAuthor() { Console.WriteLine("Editar autor del libro"); Console.ReadKey(); }
+    static void EditBookYearCategory() { Console.WriteLine("Editar año o categoría"); Console.ReadKey(); }
+    static void DeleteBook() { Console.WriteLine("Eliminar libro (validar si está prestado)"); Console.ReadKey(); }
 
-    static void ListBooksMenu()
-    {
-        Console.WriteLine("Función ListBooksMenu ejecutada");
-        Console.ReadKey();
-    }
+    static void RegisterUser() { Console.WriteLine("Registrar usuario"); Console.ReadKey(); }
+    static void ListUsers() { Console.WriteLine("Listar usuarios"); Console.ReadKey(); }
+    static void ViewUserDetail() { Console.WriteLine("Ver detalle del usuario"); Console.ReadKey(); }
+    static void EditUserName() { Console.WriteLine("Editar nombre"); Console.ReadKey(); }
+    static void EditUserContact() { Console.WriteLine("Editar contacto"); Console.ReadKey(); }
+    static void ToggleUserActiveStatus() { Console.WriteLine("Activar / desactivar usuario"); Console.ReadKey(); }
+    static void DeleteUser() { Console.WriteLine("Eliminar usuario (validar préstamos activos)"); Console.ReadKey(); }
 
-    static void ListBooksAll()
-    {
-        Console.WriteLine("Función ListBooksAll ejecutada");
-        Console.ReadKey();
-    }
+    static void CreateLoan() { Console.WriteLine("Crear préstamo (mostrar validaciones)"); Console.ReadKey(); }
+    static void ListLoansAll() { Console.WriteLine("Listar todos los préstamos"); Console.ReadKey(); }
+    static void ListLoansActive() { Console.WriteLine("Listar préstamos activos"); Console.ReadKey(); }
+    static void ListLoansClosed() { Console.WriteLine("Listar préstamos cerrados"); Console.ReadKey(); }
+    static void ViewLoanDetail() { Console.WriteLine("Ver detalle del préstamo"); Console.ReadKey(); }
+    static void RegisterReturn() { Console.WriteLine("Registrar devolución"); Console.ReadKey(); }
+    static void DeleteLoan() { Console.WriteLine("Eliminar préstamo"); Console.ReadKey(); }
 
-    static void ListBooksAvailable()
-    {
-        Console.WriteLine("Función ListBooksAvailable ejecutada");
-        Console.ReadKey();
-    }
+    static void SearchBook() { Console.WriteLine("Buscar libro"); Console.ReadKey(); }
+    static void SearchUser() { Console.WriteLine("Buscar usuario"); Console.ReadKey(); }
+    static void ReportByUser() { Console.WriteLine("Reporte por usuario"); Console.ReadKey(); }
+    static void ReportByBook() { Console.WriteLine("Reporte por libro"); Console.ReadKey(); }
+    static void ReportOverdue() { Console.WriteLine("Reporte de préstamos vencidos"); Console.ReadKey(); }
+    static void ReportSummary() { Console.WriteLine("Resumen del sistema"); Console.ReadKey(); }
 
-    static void ListBooksBorrowed()
-    {
-        Console.WriteLine("Función ListBooksBorrowed ejecutada");
-        Console.ReadKey();
-    }
-
-    static void ViewBookDetail()
-    {
-        Console.WriteLine("Función ViewBookDetail ejecutada");
-        Console.ReadKey();
-    }
-
-    static void UpdateBookMenu()
-    {
-        Console.WriteLine("Función UpdateBookMenu ejecutada");
-        Console.ReadKey();
-    }
-
-    static void EditBookTitle()
-    {
-        Console.WriteLine("Función EditBookTitle ejecutada");
-        Console.ReadKey();
-    }
-
-    static void EditBookAuthor()
-    {
-        Console.WriteLine("Función EditBookAuthor ejecutada");
-        Console.ReadKey();
-    }
-
-    static void EditBookYearCategory()
-    {
-        Console.WriteLine("Función EditBookYearCategory ejecutada");
-        Console.ReadKey();
-    }
-
-    static void DeleteBook()
-    {
-        Console.WriteLine("Función DeleteBook ejecutada");
-        Console.ReadKey();
-    }
-
-    // ==============================
-    // FUNCIONES USUARIOS
-    // ==============================
-
-    static void RegisterUser()
-    {
-        Console.WriteLine("Función RegisterUser ejecutada");
-        Console.ReadKey();
-    }
-
-    static void ListUsers()
-    {
-        Console.WriteLine("Función ListUsers ejecutada");
-        Console.ReadKey();
-    }
-
-    static void ViewUserDetail()
-    {
-        Console.WriteLine("Función ViewUserDetail ejecutada");
-        Console.ReadKey();
-    }
-
-    static void UpdateUserMenu()
-    {
-        Console.WriteLine("Función UpdateUserMenu ejecutada");
-        Console.ReadKey();
-    }
-
-    static void EditUserName()
-    {
-        Console.WriteLine("Función EditUserName ejecutada");
-        Console.ReadKey();
-    }
-
-    static void EditUserContact()
-    {
-        Console.WriteLine("Función EditUserContact ejecutada");
-        Console.ReadKey();
-    }
-
-    static void ToggleUserActiveStatus()
-    {
-        Console.WriteLine("Función ToggleUserActiveStatus ejecutada");
-        Console.ReadKey();
-    }
-
-    static void DeleteUser()
-    {
-        Console.WriteLine("Función DeleteUser ejecutada");
-        Console.ReadKey();
-    }
-
-    // ==============================
-    // FUNCIONES PRÉSTAMOS
-    // ==============================
-
-    static void CreateLoan()
-    {
-        Console.WriteLine("Función CreateLoan ejecutada");
-        Console.ReadKey();
-    }
-
-    static void ListLoansMenu()
-    {
-        Console.WriteLine("Función ListLoansMenu ejecutada");
-        Console.ReadKey();
-    }
-
-    static void ListLoansAll()
-    {
-        Console.WriteLine("Función ListLoansAll ejecutada");
-        Console.ReadKey();
-    }
-
-    static void ListLoansActive()
-    {
-        Console.WriteLine("Función ListLoansActive ejecutada");
-        Console.ReadKey();
-    }
-
-    static void ListLoansClosed()
-    {
-        Console.WriteLine("Función ListLoansClosed ejecutada");
-        Console.ReadKey();
-    }
-
-    static void ViewLoanDetail()
-    {
-        Console.WriteLine("Función ViewLoanDetail ejecutada");
-        Console.ReadKey();
-    }
-
-    static void RegisterReturn()
-    {
-        Console.WriteLine("Función RegisterReturn ejecutada");
-        Console.ReadKey();
-    }
-
-    static void DeleteLoan()
-    {
-        Console.WriteLine("Función DeleteLoan ejecutada");
-        Console.ReadKey();
-    }
-
-    // ==============================
-    // FUNCIONES REPORTES
-    // ==============================
-
-    static void SearchBook()
-    {
-        Console.WriteLine("Función SearchBook ejecutada");
-        Console.ReadKey();
-    }
-
-    static void SearchUser()
-    {
-        Console.WriteLine("Función SearchUser ejecutada");
-        Console.ReadKey();
-    }
-
-    static void ShowReportsMenu()
-    {
-        Console.WriteLine("Función ShowReportsMenu ejecutada");
-        Console.ReadKey();
-    }
-
-    static void ReportByUser()
-    {
-        Console.WriteLine("Función ReportByUser ejecutada");
-        Console.ReadKey();
-    }
-
-    static void ReportByBook()
-    {
-        Console.WriteLine("Función ReportByBook ejecutada");
-        Console.ReadKey();
-    }
-
-    static void ReportOverdue()
-    {
-        Console.WriteLine("Función ReportOverdue ejecutada");
-        Console.ReadKey();
-    }
-
-    static void ReportSummary()
-    {
-        Console.WriteLine("Función ReportSummary ejecutada");
-        Console.ReadKey();
-    }
-
-    // ==============================
-    // FUNCIONES PERSISTENCIA
-    // ==============================
-
-    static void SaveData()
-    {
-        Console.WriteLine("Función SaveData ejecutada");
-        Console.ReadKey();
-    }
-
-    static void LoadData()
-    {
-        Console.WriteLine("Función LoadData ejecutada");
-        Console.ReadKey();
-    }
+    static void SaveData() { Console.WriteLine("Datos guardados"); Console.ReadKey(); }
+    static void LoadData() { Console.WriteLine("Datos cargados"); Console.ReadKey(); }
 
     static void ResetData()
     {
-        Console.WriteLine("Función ResetData ejecutada");
+        Console.WriteLine("Datos reiniciados");
         Console.ReadKey();
     }
 
     static void ConfirmResetData()
     {
-        Console.WriteLine("Función ConfirmResetData ejecutada");
-        Console.ReadKey();
-    }
+        Console.WriteLine("¿Seguro que desea reiniciar los datos? (S/N)");
+        string answer = Console.ReadLine();
 
-    // ==============================
-    // SALIDA
-    // ==============================
+        if (answer.ToUpper() == "S")
+        {
+            ResetData();
+        }
+    }
 
     static void ConfirmExitAndSave()
     {
+        Console.WriteLine("¿Desea guardar antes de salir? (S/N)");
+        string answer = Console.ReadLine();
+
+        if (answer.ToUpper() == "S")
+        {
+            SaveData();
+        }
+
         Console.WriteLine("Saliendo del sistema...");
         Console.ReadKey();
     }
