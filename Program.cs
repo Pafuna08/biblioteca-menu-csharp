@@ -528,20 +528,62 @@ class Program
 
     static void TestObjects()
     {
-        Console.Clear();
+    Console.Clear();
 
-        Libro libro = new Libro(1, "Prueba", "Autor", 2020, "General");
-        Usuario usuario = new Usuario(1, "Carlos", "123");
+    // ==============================
+    // CREACIÓN DE OBJETOS
+    // ==============================
 
-        Prestamo prestamo = new Prestamo(1, libro, usuario, DateTime.Now.AddDays(-10));
+    // Libros (2)
+    Libro libro1 = new Libro(1, "Prueba", "Autor", 2020, "General");
+    Libro libro2 = new Libro(2, "Cien años de soledad", "Gabriel García Márquez", 1967, "Novela");
 
-        Console.WriteLine(libro.DetalleCompleto());
-        Console.WriteLine(usuario.DetalleCompleto());
-        Console.WriteLine(prestamo.DetalleCompleto());
+    // Usuarios (2)
+    Usuario usuario1 = new Usuario(1, "Carlos", "123");
+    Usuario usuario2 = new Usuario(2, "Ana", "456");
 
-        Console.WriteLine($"Vencido: {prestamo.EstaVencido()}");
-        Console.WriteLine($"Días: {prestamo.DiasTranscurridos()}");
+    // Préstamo (1)
+    Prestamo prestamo = new Prestamo(1, libro1, usuario1, DateTime.Now.AddDays(-10));
 
-        Console.ReadKey();
+    // ==============================
+    // MOSTRAR RESÚMENES
+    // ==============================
+
+    Console.WriteLine("=== RESÚMENES ===");
+    Console.WriteLine(libro1.ResumenCorto());
+    Console.WriteLine(libro2.ResumenCorto());
+    Console.WriteLine(usuario1.ResumenCorto());
+    Console.WriteLine(usuario2.ResumenCorto());
+    Console.WriteLine(prestamo.ResumenCorto());
+
+    // ==============================
+    // MOSTRAR DETALLES COMPLETOS
+    // ==============================
+
+    Console.WriteLine("\n=== DETALLES COMPLETOS ===");
+    Console.WriteLine(libro1.DetalleCompleto());
+    Console.WriteLine(libro2.DetalleCompleto());
+    Console.WriteLine(usuario1.DetalleCompleto());
+    Console.WriteLine(usuario2.DetalleCompleto());
+    Console.WriteLine(prestamo.DetalleCompleto());
+
+    // ==============================
+    // VALIDACIONES
+    // ==============================
+
+    Console.WriteLine("\n=== VALIDACIONES ===");
+
+    Console.WriteLine($"Libro1 disponible: {libro1.Disponible}");
+    Console.WriteLine($"Libro2 disponible: {libro2.Disponible}");
+
+    Console.WriteLine($"Usuario1 activo: {usuario1.Activo}");
+    Console.WriteLine($"Usuario2 activo: {usuario2.Activo}");
+
+    Console.WriteLine($"Estado del préstamo: {prestamo.Estado}");
+
+    Console.WriteLine($"¿Está vencido?: {prestamo.EstaVencido()}");
+    Console.WriteLine($"Días transcurridos: {prestamo.DiasTranscurridos()}");
+
+    Console.ReadKey();
     }
 }
