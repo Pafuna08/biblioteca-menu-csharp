@@ -1,5 +1,5 @@
 ﻿using System;
-
+using BibliotecaMenu.Models;
 class Program
 {
     static void Main()
@@ -25,6 +25,7 @@ class Program
             Console.WriteLine("4. Búsquedas y reportes");
             Console.WriteLine("5. Guardar / Cargar datos");
             Console.WriteLine("6. Salir");
+            Console.WriteLine("7. Probar modelos");
             Console.Write("Seleccione una opción: ");
 
             int.TryParse(Console.ReadLine(), out option);
@@ -53,6 +54,9 @@ class Program
 
                 case 6:
                     ConfirmExitAndSave();
+                    break;
+                case 7:
+                    TestObjects();
                     break;
 
                 default:
@@ -517,6 +521,25 @@ class Program
         }
 
         Console.WriteLine("Saliendo del sistema...");
+        Console.ReadKey();
+    }
+    
+    static void TestObjects()
+    {
+        Console.Clear();
+
+        Libro libro = new Libro(1, "Prueba", "Autor", 2020, "General");
+        Usuario usuario = new Usuario(1, "Carlos", "123");
+
+        Prestamo prestamo = new Prestamo(1, libro, usuario, DateTime.Now.AddDays(-10));
+
+        Console.WriteLine(libro.DetalleCompleto());
+        Console.WriteLine(usuario.DetalleCompleto());
+        Console.WriteLine(prestamo.DetalleCompleto());
+
+        Console.WriteLine($"Vencido: {prestamo.EstaVencido()}");
+        Console.WriteLine($"Días: {prestamo.DiasTranscurridos()}");
+
         Console.ReadKey();
     }
 }
