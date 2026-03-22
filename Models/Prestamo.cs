@@ -1,5 +1,5 @@
 using System;
-
+// Clase que representa un préstamo de libro
 namespace BibliotecaMenu.Models
 {
     public class Prestamo
