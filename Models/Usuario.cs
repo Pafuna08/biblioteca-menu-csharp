@@ -1,5 +1,6 @@
 using System;
 
+// Clase que representa un usuario del sistema
 namespace BibliotecaMenu.Models
 {
     public class Usuario

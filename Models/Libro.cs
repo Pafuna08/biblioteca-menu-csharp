@@ -1,5 +1,6 @@
 using System;
 
+// Clase que representa un libro del sistema
 namespace BibliotecaMenu.Models
 {
     public class Libro
