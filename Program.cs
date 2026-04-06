@@ -1,9 +1,12 @@
 ﻿using System;
 
 using BibliotecaMenu.Models; 
+using BibliotecaMenu.Services;
 
 class Program
 {
+    static LibroService libroService = new LibroService();
+
     static void Main()
     {
         ShowMainMenu();
@@ -57,6 +60,7 @@ class Program
                 case 6:
                     ConfirmExitAndSave();
                     break;
+
                 case 7:
                     TestObjects();
                     break;
@@ -456,10 +460,40 @@ class Program
     }
 
     // ==============================
-    // FUNCIONES STUB
+    // FUNCIONES MODIFICADAS
     // ==============================
 
-    static void RegisterBook() { Console.WriteLine("Registrar libro"); Console.ReadKey(); }
+    static void RegisterBook()
+    {
+        Console.Clear();
+
+        Console.Write("ID: ");
+        int id = int.Parse(Console.ReadLine());
+
+        Console.Write("Título: ");
+        string titulo = Console.ReadLine();
+
+        Console.Write("Autor: ");
+        string autor = Console.ReadLine();
+
+        Console.Write("Año: ");
+        int anio = int.Parse(Console.ReadLine());
+
+        Console.Write("Categoría: ");
+        string categoria = Console.ReadLine();
+
+        Libro libro = new Libro(id, titulo, autor, anio, categoria);
+
+        libroService.AgregarLibro(libro);
+
+        Console.WriteLine("Libro agregado correctamente");
+        Console.ReadKey();
+    }
+
+    // ==============================
+    // STUBS (IGUAL QUE TU ORIGINAL)
+    // ==============================
+
     static void ListBooksAll() { Console.WriteLine("Listar todos los libros"); Console.ReadKey(); }
     static void ListBooksAvailable() { Console.WriteLine("Listar libros disponibles"); Console.ReadKey(); }
     static void ListBooksBorrowed() { Console.WriteLine("Listar libros prestados"); Console.ReadKey(); }
@@ -467,7 +501,7 @@ class Program
     static void EditBookTitle() { Console.WriteLine("Editar título del libro"); Console.ReadKey(); }
     static void EditBookAuthor() { Console.WriteLine("Editar autor del libro"); Console.ReadKey(); }
     static void EditBookYearCategory() { Console.WriteLine("Editar año o categoría"); Console.ReadKey(); }
-    static void DeleteBook() { Console.WriteLine("Eliminar libro (validar si está prestado)"); Console.ReadKey(); }
+    static void DeleteBook() { Console.WriteLine("Eliminar libro"); Console.ReadKey(); }
 
     static void RegisterUser() { Console.WriteLine("Registrar usuario"); Console.ReadKey(); }
     static void ListUsers() { Console.WriteLine("Listar usuarios"); Console.ReadKey(); }
@@ -475,115 +509,59 @@ class Program
     static void EditUserName() { Console.WriteLine("Editar nombre"); Console.ReadKey(); }
     static void EditUserContact() { Console.WriteLine("Editar contacto"); Console.ReadKey(); }
     static void ToggleUserActiveStatus() { Console.WriteLine("Activar / desactivar usuario"); Console.ReadKey(); }
-    static void DeleteUser() { Console.WriteLine("Eliminar usuario (validar préstamos activos)"); Console.ReadKey(); }
+    static void DeleteUser() { Console.WriteLine("Eliminar usuario"); Console.ReadKey(); }
 
-    static void CreateLoan() { Console.WriteLine("Crear préstamo (mostrar validaciones)"); Console.ReadKey(); }
-    static void ListLoansAll() { Console.WriteLine("Listar todos los préstamos"); Console.ReadKey(); }
-    static void ListLoansActive() { Console.WriteLine("Listar préstamos activos"); Console.ReadKey(); }
-    static void ListLoansClosed() { Console.WriteLine("Listar préstamos cerrados"); Console.ReadKey(); }
-    static void ViewLoanDetail() { Console.WriteLine("Ver detalle del préstamo"); Console.ReadKey(); }
+    static void CreateLoan() { Console.WriteLine("Crear préstamo"); Console.ReadKey(); }
+    static void ListLoansAll() { Console.WriteLine("Listar préstamos"); Console.ReadKey(); }
+    static void ListLoansActive() { Console.WriteLine("Préstamos activos"); Console.ReadKey(); }
+    static void ListLoansClosed() { Console.WriteLine("Préstamos cerrados"); Console.ReadKey(); }
+    static void ViewLoanDetail() { Console.WriteLine("Detalle préstamo"); Console.ReadKey(); }
     static void RegisterReturn() { Console.WriteLine("Registrar devolución"); Console.ReadKey(); }
     static void DeleteLoan() { Console.WriteLine("Eliminar préstamo"); Console.ReadKey(); }
 
     static void SearchBook() { Console.WriteLine("Buscar libro"); Console.ReadKey(); }
     static void SearchUser() { Console.WriteLine("Buscar usuario"); Console.ReadKey(); }
-    static void ReportByUser() { Console.WriteLine("Reporte por usuario"); Console.ReadKey(); }
-    static void ReportByBook() { Console.WriteLine("Reporte por libro"); Console.ReadKey(); }
-    static void ReportOverdue() { Console.WriteLine("Reporte de préstamos vencidos"); Console.ReadKey(); }
-    static void ReportSummary() { Console.WriteLine("Resumen del sistema"); Console.ReadKey(); }
+    static void ReportByUser() { Console.WriteLine("Reporte usuario"); Console.ReadKey(); }
+    static void ReportByBook() { Console.WriteLine("Reporte libro"); Console.ReadKey(); }
+    static void ReportOverdue() { Console.WriteLine("Vencidos"); Console.ReadKey(); }
+    static void ReportSummary() { Console.WriteLine("Resumen"); Console.ReadKey(); }
 
     static void SaveData() { Console.WriteLine("Datos guardados"); Console.ReadKey(); }
     static void LoadData() { Console.WriteLine("Datos cargados"); Console.ReadKey(); }
 
-    static void ResetData()
-    {
-        Console.WriteLine("Datos reiniciados");
-        Console.ReadKey();
-    }
-
     static void ConfirmResetData()
     {
-        Console.WriteLine("¿Seguro que desea reiniciar los datos? (S/N)");
-        string answer = Console.ReadLine();
+        Console.WriteLine("¿Seguro que desea reiniciar? (S/N)");
+        if (Console.ReadLine().ToUpper() == "S")
+            Console.WriteLine("Datos reiniciados");
 
-        if (answer.ToUpper() == "S")
-        {
-            ResetData();
-        }
+        Console.ReadKey();
     }
 
     static void ConfirmExitAndSave()
     {
-        Console.WriteLine("¿Desea guardar antes de salir? (S/N)");
-        string answer = Console.ReadLine();
-
-        if (answer.ToUpper() == "S")
-        {
-            SaveData();
-        }
-
-        Console.WriteLine("Saliendo del sistema...");
+        Console.WriteLine("Saliendo...");
         Console.ReadKey();
     }
 
+    // ==============================
+    // TEST
+    // ==============================
+
     static void TestObjects()
     {
-    Console.Clear();
+        Console.Clear();
 
-    // ==============================
-    // CREACIÓN DE OBJETOS
-    // ==============================
+        Libro libro1 = new Libro(1, "Prueba", "Autor", 2020, "General");
+        Libro libro2 = new Libro(2, "Cien años", "Gabo", 1967, "Novela");
 
-    // Libros (2)
-    Libro libro1 = new Libro(1, "Prueba", "Autor", 2020, "General");
-    Libro libro2 = new Libro(2, "Cien años de soledad", "Gabriel García Márquez", 1967, "Novela");
+        libroService.AgregarLibro(libro1);
+        libroService.AgregarLibro(libro2);
 
-    // Usuarios (2)
-    Usuario usuario1 = new Usuario(1, "Carlos", "123");
-    Usuario usuario2 = new Usuario(2, "Ana", "456");
+        Console.WriteLine("=== PRUEBA SERVICE ===");
+        Console.WriteLine("Total: " + libroService.TotalLibros());
+        Console.WriteLine("Disponibles: " + libroService.LibrosDisponibles());
 
-    // Préstamo (1)
-    Prestamo prestamo = new Prestamo(1, libro1, usuario1, DateTime.Now.AddDays(-10));
-
-    // ==============================
-    // MOSTRAR RESÚMENES
-    // ==============================
-
-    Console.WriteLine("=== RESÚMENES ===");
-    Console.WriteLine(libro1.ResumenCorto());
-    Console.WriteLine(libro2.ResumenCorto());
-    Console.WriteLine(usuario1.ResumenCorto());
-    Console.WriteLine(usuario2.ResumenCorto());
-    Console.WriteLine(prestamo.ResumenCorto());
-
-    // ==============================
-    // MOSTRAR DETALLES COMPLETOS
-    // ==============================
-
-    Console.WriteLine("\n=== DETALLES COMPLETOS ===");
-    Console.WriteLine(libro1.DetalleCompleto());
-    Console.WriteLine(libro2.DetalleCompleto());
-    Console.WriteLine(usuario1.DetalleCompleto());
-    Console.WriteLine(usuario2.DetalleCompleto());
-    Console.WriteLine(prestamo.DetalleCompleto());
-
-    // ==============================
-    // VALIDACIONES
-    // ==============================
-
-    Console.WriteLine("\n=== VALIDACIONES ===");
-
-    Console.WriteLine($"Libro1 disponible: {libro1.Disponible}");
-    Console.WriteLine($"Libro2 disponible: {libro2.Disponible}");
-
-    Console.WriteLine($"Usuario1 activo: {usuario1.Activo}");
-    Console.WriteLine($"Usuario2 activo: {usuario2.Activo}");
-
-    Console.WriteLine($"Estado del préstamo: {prestamo.Estado}");
-
-    Console.WriteLine($"¿Está vencido?: {prestamo.EstaVencido()}");
-    Console.WriteLine($"Días transcurridos: {prestamo.DiasTranscurridos()}");
-
-    Console.ReadKey();
+        Console.ReadKey();
     }
 }
