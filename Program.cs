@@ -7,6 +7,7 @@ class Program
 {
     static LibroService libroService = new LibroService();
     static UsuarioService usuarioService = new UsuarioService();
+    static PrestamoService prestamoService = new PrestamoService();
 
     static void Main()
     {
@@ -531,7 +532,40 @@ class Program
     static void ToggleUserActiveStatus() { Console.WriteLine("Activar / desactivar usuario"); Console.ReadKey(); }
     static void DeleteUser() { Console.WriteLine("Eliminar usuario"); Console.ReadKey(); }
 
-    static void CreateLoan() { Console.WriteLine("Crear préstamo"); Console.ReadKey(); }
+    static void CreateLoan()
+{
+    Console.Clear();
+
+    Console.Write("ID préstamo: ");
+    int id = int.Parse(Console.ReadLine());
+
+    Console.Write("ID libro: ");
+    int idLibro = int.Parse(Console.ReadLine());
+
+    Console.Write("ID usuario: ");
+    int idUsuario = int.Parse(Console.ReadLine());
+
+    var libro = libroService.BuscarPorId(idLibro);
+    var usuario = usuarioService.BuscarPorId(idUsuario);
+
+    if (libro == null || usuario == null)
+    {
+        Console.WriteLine("Libro o usuario no existe");
+        Console.ReadKey();
+        return;
+    }
+
+    Prestamo prestamo = new Prestamo(id, libro, usuario, DateTime.Now);
+
+    bool creado = prestamoService.CrearPrestamo(prestamo);
+
+    if (creado)
+        Console.WriteLine("Préstamo creado correctamente");
+    else
+        Console.WriteLine("No se pudo crear el préstamo");
+
+    Console.ReadKey();
+}
     static void ListLoansAll() { Console.WriteLine("Listar préstamos"); Console.ReadKey(); }
     static void ListLoansActive() { Console.WriteLine("Préstamos activos"); Console.ReadKey(); }
     static void ListLoansClosed() { Console.WriteLine("Préstamos cerrados"); Console.ReadKey(); }
