@@ -2,6 +2,7 @@
 
 using BibliotecaMenu.Models; 
 using BibliotecaMenu.Services;
+using System.Collections.Generic;
 
 class Program
 {
@@ -496,7 +497,26 @@ class Program
     // STUBS (IGUAL QUE TU ORIGINAL)
     // ==============================
 
-    static void ListBooksAll() { Console.WriteLine("Listar todos los libros"); Console.ReadKey(); }
+    static void ListBooksAll()
+{
+    Console.Clear();
+
+    var libros = libroService.ObtenerTodos();
+
+    if (libros.Count == 0)
+    {
+        Console.WriteLine("No hay libros registrados");
+    }
+    else
+    {
+        foreach (var libro in libros)
+        {
+            Console.WriteLine(libro.ResumenCorto());
+        }
+    }
+
+    Console.ReadKey();
+}
     static void ListBooksAvailable() { Console.WriteLine("Listar libros disponibles"); Console.ReadKey(); }
     static void ListBooksBorrowed() { Console.WriteLine("Listar libros prestados"); Console.ReadKey(); }
     static void ViewBookDetail() { Console.WriteLine("Ver detalle del libro"); Console.ReadKey(); }
@@ -525,7 +545,26 @@ class Program
     Console.WriteLine("Usuario registrado correctamente");
     Console.ReadKey();
 }
-    static void ListUsers() { Console.WriteLine("Listar usuarios"); Console.ReadKey(); }
+    static void ListUsers()
+{
+    Console.Clear();
+
+    var usuarios = usuarioService.ObtenerTodos();
+
+    if (usuarios.Count == 0)
+    {
+        Console.WriteLine("No hay usuarios registrados");
+    }
+    else
+    {
+        foreach (var u in usuarios)
+        {
+            Console.WriteLine(u.ResumenCorto());
+        }
+    }
+
+    Console.ReadKey();
+}
     static void ViewUserDetail() { Console.WriteLine("Ver detalle del usuario"); Console.ReadKey(); }
     static void EditUserName() { Console.WriteLine("Editar nombre"); Console.ReadKey(); }
     static void EditUserContact() { Console.WriteLine("Editar contacto"); Console.ReadKey(); }
@@ -566,7 +605,26 @@ class Program
 
     Console.ReadKey();
 }
-    static void ListLoansAll() { Console.WriteLine("Listar préstamos"); Console.ReadKey(); }
+    static void ListLoansAll()
+{
+    Console.Clear();
+
+    var prestamos = prestamoService.ObtenerTodos();
+
+    if (prestamos.Count == 0)
+    {
+        Console.WriteLine("No hay préstamos registrados");
+    }
+    else
+    {
+        foreach (var p in prestamos)
+        {
+            Console.WriteLine(p.ResumenCorto());
+        }
+    }
+
+    Console.ReadKey();
+}
     static void ListLoansActive() { Console.WriteLine("Préstamos activos"); Console.ReadKey(); }
     static void ListLoansClosed() { Console.WriteLine("Préstamos cerrados"); Console.ReadKey(); }
     static void ViewLoanDetail() { Console.WriteLine("Detalle préstamo"); Console.ReadKey(); }
@@ -578,7 +636,34 @@ class Program
     static void ReportByUser() { Console.WriteLine("Reporte usuario"); Console.ReadKey(); }
     static void ReportByBook() { Console.WriteLine("Reporte libro"); Console.ReadKey(); }
     static void ReportOverdue() { Console.WriteLine("Vencidos"); Console.ReadKey(); }
-    static void ReportSummary() { Console.WriteLine("Resumen"); Console.ReadKey(); }
+    static void ReportSummary()
+{
+    Console.Clear();
+
+    Console.WriteLine("=== KPIs DEL SISTEMA ===\n");
+
+    // Libros
+    Console.WriteLine("LIBROS:");
+    Console.WriteLine($"Total: {libroService.TotalLibros()}");
+    Console.WriteLine($"Disponibles: {libroService.LibrosDisponibles()}");
+    Console.WriteLine($"Prestados: {libroService.LibrosPrestados()}");
+
+    // Usuarios
+    Console.WriteLine("\nUSUARIOS:");
+    Console.WriteLine($"Total: {usuarioService.TotalUsuarios()}");
+    Console.WriteLine($"Activos: {usuarioService.UsuariosActivos()}");
+    Console.WriteLine($"Inactivos: {usuarioService.UsuariosInactivos()}");
+
+    // Préstamos
+    Console.WriteLine("\nPRÉSTAMOS:");
+    Console.WriteLine($"Total: {prestamoService.TotalPrestamos()}");
+    Console.WriteLine($"Activos: {prestamoService.PrestamosActivos()}");
+    Console.WriteLine($"Devueltos: {prestamoService.PrestamosDevueltos()}");
+    Console.WriteLine($"Vencidos: {prestamoService.PrestamosVencidos()}");
+    Console.WriteLine($"Promedio días: {prestamoService.PromedioDiasPrestamo():0.00}");
+
+    Console.ReadKey();
+}
 
     static void SaveData() { Console.WriteLine("Datos guardados"); Console.ReadKey(); }
     static void LoadData() { Console.WriteLine("Datos cargados"); Console.ReadKey(); }
@@ -617,5 +702,39 @@ class Program
         Console.WriteLine("Disponibles: " + libroService.LibrosDisponibles());
 
         Console.ReadKey();
+    }
+    static void CompararArrayVsList()
+    {
+    Console.Clear();
+
+    Console.WriteLine("=== ARRAY ===");
+    string[] nombresArray = new string[2];
+    nombresArray[0] = "Juan";
+    nombresArray[1] = "Ana";
+
+    // nombresArray[2] = "Carlos"; ❌ ERROR (tamaño fijo)
+
+    foreach (var n in nombresArray)
+    {
+        Console.WriteLine(n);
+    }
+
+    Console.WriteLine("\n=== LIST ===");
+    List<string> nombresList = new List<string>();
+
+    nombresList.Add("Juan");
+    nombresList.Add("Ana");
+    nombresList.Add("Carlos"); // ✔ dinámico
+
+    foreach (var n in nombresList)
+    {
+        Console.WriteLine(n);
+    }
+
+    Console.WriteLine("\nDiferencia:");
+    Console.WriteLine("Array = tamaño fijo");
+    Console.WriteLine("List = tamaño dinámico y más flexible");
+
+    Console.ReadKey();
     }
 }
