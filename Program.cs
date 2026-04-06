@@ -6,6 +6,7 @@ using BibliotecaMenu.Services;
 class Program
 {
     static LibroService libroService = new LibroService();
+    static UsuarioService usuarioService = new UsuarioService();
 
     static void Main()
     {
@@ -503,7 +504,26 @@ class Program
     static void EditBookYearCategory() { Console.WriteLine("Editar año o categoría"); Console.ReadKey(); }
     static void DeleteBook() { Console.WriteLine("Eliminar libro"); Console.ReadKey(); }
 
-    static void RegisterUser() { Console.WriteLine("Registrar usuario"); Console.ReadKey(); }
+    static void RegisterUser()
+{
+    Console.Clear();
+
+    Console.Write("ID: ");
+    int id = int.Parse(Console.ReadLine());
+
+    Console.Write("Nombre: ");
+    string nombre = Console.ReadLine();
+
+    Console.Write("Contacto: ");
+    string contacto = Console.ReadLine();
+
+    Usuario usuario = new Usuario(id, nombre, contacto);
+
+    usuarioService.AgregarUsuario(usuario);
+
+    Console.WriteLine("Usuario registrado correctamente");
+    Console.ReadKey();
+}
     static void ListUsers() { Console.WriteLine("Listar usuarios"); Console.ReadKey(); }
     static void ViewUserDetail() { Console.WriteLine("Ver detalle del usuario"); Console.ReadKey(); }
     static void EditUserName() { Console.WriteLine("Editar nombre"); Console.ReadKey(); }
