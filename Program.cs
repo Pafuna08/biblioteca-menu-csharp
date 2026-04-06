@@ -34,6 +34,7 @@ class Program
             Console.WriteLine("5. Guardar / Cargar datos");
             Console.WriteLine("6. Salir");
             Console.WriteLine("7. Probar modelos");
+            Console.WriteLine("8. Comparar Array vs List");
             Console.Write("Seleccione una opción: ");
 
             int.TryParse(Console.ReadLine(), out option);
@@ -67,7 +68,9 @@ class Program
                 case 7:
                     TestObjects();
                     break;
-
+                case 8:
+                    CompararArrayVsList();
+                    break;
                 default:
                     Console.WriteLine("Opción inválida");
                     Console.ReadKey();
